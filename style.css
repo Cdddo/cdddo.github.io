@@ -1,0 +1,75 @@
+body {
+	background-color: #151515;
+	
+	font-family: 'Barlow', sans-serif;	
+	font-size: 18px;
+	color: white;
+}
+
+h1 {
+	font-weight: 200;
+	font-size: 3em;
+	text-align: center;
+}
+
+p {
+	font-size: 1em;
+}
+
+.title { /* this is a class selector */
+
+}
+
+.title p  {
+	margin: 0;
+	padding: 0;
+}
+
+.navigation {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-end;
+	padding: 0;
+	margin: 0;
+	background-color: deepskyblue;
+	list-style: none;
+}
+
+.navigation a {
+  text-decoration: none;
+  display: block;
+  padding: 1em;
+  color: white;
+}
+
+.navigation a:hover {
+  background: darken(deepskyblue, 2%);
+}
+
+@media all and (max-width: 800px) {
+.navigation {
+	justify-content: space-around;
+}
+}
+
+@media all and (max-width: 500px) {
+.navigation {
+	flex-direction: column;
+}
+  
+  .navigation a { 
+    text-align: center; 
+	padding: 1em;
+    border-top: 1px solid rgba(255,255,255,0.3); 
+    border-bottom: 1px solid rgba(0,0,0,0.1); 
+  }
+}
+
+#underneath { /* this is the ID selector */
+	background-color: green;
+}
+
+#underneath p {
+	margin: 0;
+	padding: 0;
+}
