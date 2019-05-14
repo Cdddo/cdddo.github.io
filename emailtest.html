@@ -4,9 +4,35 @@
 	<title>HTML email test</title>
 	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 	<link href="https://fonts.googleapis.com/css?family=Barlow:200,300,400,500,600,700" rel="stylesheet">
+	/* <link rel="stylesheet" type="text/css" href="style.css"> */
 	<style type="text/css">
-		/* something goes here */ 
+		
+		.mail-container {
+			background-color: #151515; /* dark */
+			font-family: 'Barlow', sans-serif;	
+			font-size: 18px;
+			color: white;
+		}
+
+		.mail-header {
+			background-color: DeepSkyBlue;
+		}
+		
+		.mail-body {
+			/* Style goes here */
+		}
+		.mail-body h1 {
+			font-weight: 200;
+			font-size: 3em;
+			text-align: center;
+		}
+		
+		.mail-footer {
+			background-color: DeepSkyBlue;
+		}
+
 	</style>
+	
 </head>
 
 <body>
@@ -34,14 +60,24 @@
 		<li>Test on a lot of email clients and mobile devices</li>
 	</ul>
 </div>
-				  
-<div class="mail-header">
-</div>
-<div class="mail-body">
-</div>
-<div class="mail-footer">
-</div>
-										  
+
+<div class="mail-container">
+	<div class="mail-header">
+		This is the mail header
+	</div>
+	<div class="mail-body">
+		<h1>This is the mail body Heading 1</h1>
+		<p>This is the mail body paragraph</p>
+		<p>Another paragraph</p>
+		<h2>This is the mail body Heading 2.</h2>
+		<ul>
+			<li>First item</li>
+			<li>Second item</li>
+		</ul>
+	</div>
+	<div class="mail-footer">
+	</div>
+</div>										  
 
 </body>
 </html>
