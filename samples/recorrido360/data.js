@@ -28,8 +28,22 @@ var APP_DATA = {
         "yaw": 0,
         "fov": 1.5707963267948966
       },
-      "linkHotspots": [],
-      "infoHotspots": []
+      "linkHotspots": [
+        {
+          "yaw": -2.394414054384148,
+          "pitch": 0.29767934668284823,
+          "rotation": 7.0685834705770345,
+          "target": "1-biblioteca"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 1.0558144540360228,
+          "pitch": -0.5240407730984451,
+          "title": "Punto de Interés",
+          "text": "Aquí puedes describir a detalle el punto de interés."
+        }
+      ]
     },
     {
       "id": "1-biblioteca",
@@ -80,7 +94,7 @@ var APP_DATA = {
   "name": "Recorrido Interactivo 360",
   "settings": {
     "mouseViewMode": "drag",
-    "autorotateEnabled": false,
+    "autorotateEnabled": true,
     "fullscreenButton": true,
     "viewControlButtons": true
   }
