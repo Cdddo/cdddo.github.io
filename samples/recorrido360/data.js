@@ -45,7 +45,7 @@ var APP_DATA = {
         },
         {
           "yaw": -0.174532925199433,
-          "pitch": 0.523598775598299,
+          "pitch": 0.261799387799149,
           "title": "Punto de Interés",
           "text": "Aquí puedes describir a detalle el punto de interés."
         }
