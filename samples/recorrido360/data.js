@@ -24,8 +24,8 @@ var APP_DATA = {
       ],
       "faceSize": 1344,
       "initialViewParameters": {
-        "pitch": 0,
         "yaw": 0,
+        "pitch": 0,
         "fov": 1.5707963267948966
       },
       "linkHotspots": [
@@ -38,7 +38,7 @@ var APP_DATA = {
       ],
       "infoHotspots": [
         {
-          "yaw": 1,
+          "yaw": 3.14159265358979,
           "pitch": 0,
           "title": "Punto de Interés",
           "text": "Aquí puedes describir a detalle el punto de interés."
