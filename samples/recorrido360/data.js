@@ -31,7 +31,7 @@ var APP_DATA = {
       "linkHotspots": [
         {
           "yaw": 1.5707963267948966,
-          "pitch": 0.523598775598299,
+          "pitch": 0.349065850398866,
           "rotation": 0,
           "target": "1-salon"
         }
@@ -40,6 +40,12 @@ var APP_DATA = {
         {
           "yaw": 3.14159265358979,
           "pitch": 0,
+          "title": "Punto de Interés",
+          "text": "Aquí puedes describir a detalle el punto de interés."
+        },
+        {
+          "yaw": -0.174532925199433,
+          "pitch": 0.523598775598299,
           "title": "Punto de Interés",
           "text": "Aquí puedes describir a detalle el punto de interés."
         }
