@@ -30,10 +30,10 @@ var APP_DATA = {
       },
       "linkHotspots": [
         {
-          "yaw": 0,
+          "yaw": 1.5707963267948966,
           "pitch": 0,
           "rotation": 0,
-          "target": "1-biblioteca"
+          "target": "1-salon"
         }
       ],
       "infoHotspots": [
@@ -46,8 +46,8 @@ var APP_DATA = {
       ]
     },
     {
-      "id": "1-biblioteca",
-      "name": "Biblioteca",
+      "id": "1-salon",
+      "name": "Gran Salon",
       "levels": [
         {
           "tileSize": 256,
