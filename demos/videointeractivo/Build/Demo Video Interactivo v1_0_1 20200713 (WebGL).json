@@ -1,0 +1,16 @@
+{
+"companyName": "Hypertectonics",
+"productName": "Demo Video Interactivo",
+"productVersion": "1.0.1",
+"dataUrl": "Demo Video Interactivo v1_0_1 20200713 (WebGL).data.unityweb",
+"wasmCodeUrl": "Demo Video Interactivo v1_0_1 20200713 (WebGL).wasm.code.unityweb",
+"wasmFrameworkUrl": "Demo Video Interactivo v1_0_1 20200713 (WebGL).wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.3f1"
+}
