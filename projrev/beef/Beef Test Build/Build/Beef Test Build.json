@@ -1,7 +1,7 @@
 {
 "companyName": "Hypertectonics",
 "productName": "Project-Canadian-Beef",
-"productVersion": "0.1.0",
+"productVersion": "0.2.0",
 "dataUrl": "Beef Test Build.data.unityweb",
 "wasmCodeUrl": "Beef Test Build.wasm.code.unityweb",
 "wasmFrameworkUrl": "Beef Test Build.wasm.framework.unityweb",
