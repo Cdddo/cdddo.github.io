@@ -3,7 +3,7 @@
 "productName": "Project-Canadian-Beef",
 "productVersion": "0.2.0",
 "dataUrl": "Beef Test Build.data.unityweb",
-"wasmCodeUrl": "Beef Test Build.wasm.code.unityweb",
+"wasmCodeUrl": "Beef Test Build.wasm",
 "wasmFrameworkUrl": "Beef Test Build.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
