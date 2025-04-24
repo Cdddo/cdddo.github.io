@@ -1,0 +1,297 @@
+<!doctype html>
+<meta charset="utf-8">
+<html>
+    <head>
+        <title>Glb Viewer</title>
+        <style>
+            html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+            }
+        </style>
+        <script type="importmap" class="es6_modules_map">
+            {
+                "imports": {
+                    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/jsm/",
+                    "three/examples/": "https://cdn.jsdelivr.net/npm/three@0.164.0/examples/"
+                }
+            }
+        </script>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <style>
+        .lil-gui {
+            --title-background-color: rgba(0,0,0,0.25);
+            --background-color: rgba(0,0,0,0.25);
+            --widget-color: rgba(1,1,1,0.25);
+        }
+        .lil-gui.root {
+            position: absolute;
+            top: 0;
+            right: 0;
+            /* display: none; */
+        }
+    </style>
+    <style>
+        #tree-view {
+            padding: 10px;
+            background-color: rgba(0,0,0,0.25);
+            color: white;
+            font-size: 11px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            display: none;
+        }
+        .tree-node {
+            margin: 5px 0;
+            white-space: nowrap;
+        }
+        .tree-content {
+            align-items: center;
+        }
+        #tree-view .toggle-btn {
+            display: inline-block;
+            cursor: pointer;
+            width: 10px;
+            text-align: center;
+        }
+        #tree-view .children {
+            margin-left: 10px;
+            display: none;
+        }
+
+        #tree-view .selected {
+            background-color: rgba(255,255,255,0.5);
+            color: black;
+        }
+
+        #tree-view .expanded > .children {
+            display: block;
+        }
+    </style>
+    <body style="margin: 0; background-color: black; display: flex; justify-content: center; align-items: center; height: 100vh;">
+
+        <div id="icosa-wrapper" style="position: relative; width: 100%; height: 100%; display: flex;">
+            <div id="tree-view" style="width: 250px; overflow-y: auto; flex-shrink: 0;"></div>
+            <div id="icosa-viewer" style="flex-grow: 1; height: 100%;"></div>
+        </div>
+
+        <script type="module">
+            import { Viewer } from "./icosa-viewer.module.js";
+            import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
+
+            let viewer = new Viewer("https://icosa-foundation.github.io/icosa-sketch-assets/");
+            // viewer.crossOrigin = "no-cors";
+            let THREE = viewer.three;
+            window.viewer = viewer;
+            window.THREE = THREE;
+            
+            //PREPARE FOR LOADING FILE
+
+            // Get parameter from URL
+            const id = new URLSearchParams(window.location.search).get('id');
+
+            let cameraRotation = [-0.1462917120878683, 0.2306854792441933, 0.03510497024615985, 0.9613275121956582];
+            let cameraTranslation = [1.586311936378479, 2.004192590713501, 3.153336048126221];
+            let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": "#000000", "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": { "color": [0, 0, 0] }, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
+            let overrides = {
+                'defaultBackgroundColor': presentationParams?.backgroundColor || "#000000",
+                'camera': presentationParams.camera,
+                'geometryData': presentationParams.GOOGLE_geometry_data,
+                'colorSpace': presentationParams.colorSpace,
+            };
+
+            const cases = {
+                "0": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/test/Untitled_0.glb", "overrides": overrides },
+                "46": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/46/Untitled_46.glb", "overrides": overrides },
+                "47": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb", "overrides": overrides },
+                "48": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb", "overrides": overrides },
+                "49": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb", "overrides": overrides },
+                // Add more cases as needed
+            };
+            if (id in cases) {
+                const { url, overrides } = cases[id];
+                console.log(`Loading GLTF2 model from URL: ${url}`);
+                await viewer.loadGltf(url, true, overrides);
+            } else {
+                // console.error(`No model found for id: ${id}`);
+                // try to load the model from an arbitrary URL
+                console.log(`Loading GLTF2 model from URL: ${id}`);
+                await viewer.loadGltf(id, true, overrides);
+            }
+            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/test/Untitled_0.glb", true, { "camera": presentationParams.camera });
+            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/46/Untitled_46.glb", true, { "camera": presentationParams.camera });
+            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb", true, { "camera": presentationParams.camera });
+            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb", true, { "camera": presentationParams.camera });
+            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb", true, { "camera": presentationParams.camera });
+
+            // await viewer.loadGltf("formats/gltf2/all_brushes.glb", true, {"camera": presentationParams.camera});
+            // await viewer.loadGltf("formats/gltf2/gradient.gltf", true, {"camera": presentationParams.camera});
+            
+            let cameras1 = [];
+            viewer.scene.traverse((child) => {
+                if (child instanceof THREE.Camera) {
+                    cameras1.push(child);
+                }
+            });
+            cameras1[0].rotation.set
+
+
+            const gui = new GUI({ autoPlace: false });
+            const parentDiv = document.getElementById('icosa-viewer');
+            parentDiv.appendChild(gui.domElement);
+
+            const guiParams = {
+                backgroundColor: '#000000',
+                fogColor: '#000000',
+                fogDensity: 0,
+                toggleTreeView: () => viewer.toggleTreeView(document.getElementById('tree-view')),
+                toggleEnvironment: () => viewer.environmentObject && (viewer.environmentObject.visible = !viewer.environmentObject.visible),
+                toggleSky: () => viewer.skyObject && (viewer.skyObject.visible = !viewer.skyObject.visible),
+                fogBackground: () => {
+                    if (viewer.skyObject && viewer.skyObject.visible) {
+                        viewer.skyObject.material.color = new THREE.Color(guiParams.fogColor).multiplyScalar(guiParams.fogDensity);
+                        viewer.skyObject.material.fog = true;
+                    } else {
+                        let bgCol = new THREE.Color(guiParams.backgroundColor);
+                        let fogColor = new THREE.Color(guiParams.fogColor).multiplyScalar(guiParams.fogDensity);
+                        let foggedBgCol = bgCol.add(fogColor); // Is this correct?
+                        viewer.scene.background = foggedBgCol;
+                    }
+                },
+                listCameras: () => {
+                    let cameras = [];
+                    viewer.scene.traverse((child) => {
+                        if (child instanceof THREE.Camera) {
+                            cameras.push(child);
+                        }
+                    });
+                    window.cameras = cameras;
+                    doLogging(cameras);
+                    // doLogging(cameras[0].position.clone());
+                    // doLogging(cameras[0].quaternion.clone());
+                },
+                listLights: () => {
+                    let lights = [];
+                    viewer.scene.traverse((child) => {
+                        if (child instanceof THREE.Light) {
+                            lights.push(child);
+                        }
+                    });
+                    window.lights = lights;
+                    doLogging(lights);
+                },
+                listOverrides: () => {
+                    doLogging(viewer.overrides);
+                },
+                listSketchMetadata: () => {
+                    doLogging(viewer.sketchMetadata);
+                },
+                frameScene: () => {
+                    viewer.frameScene();
+                },
+                levelCamera: () => {
+                    viewer.levelCamera();
+                },
+                logTargetPoint: () => {
+                    let t = viewer.cameraControls.getTarget();
+                    doLogging(t);
+                },
+                targetVisualCenterY: () => {
+                    let t = viewer.overrides?.geometryData?.visualCenterPoint;
+                    var pos = viewer.cameraControls.camera.getWorldPosition(new THREE.Vector3());
+                    doLogging([t, pos]);
+                    if (t) {viewer.cameraControls.setTarget(t[0], pos.y, t[2])}
+                },
+                targetVisualCenter: () => {
+                    let t = viewer.overrides?.geometryData?.visualCenterPoint;
+                    doLogging(t);
+                    if (t) {viewer.cameraControls.setTarget(t[0], t[1], t[2])}
+                },
+                targetBoundingBoxCenter: () => {
+                    let t = viewer.modelBoundingBox.getCenter(new THREE.Vector3());
+                    doLogging(t);
+                    if (t) {viewer.cameraControls.setTarget(t.x, t.y, t.z)}
+                },
+                targetPivot: () => {
+                    let t = viewer.overrides?.camera.GOOGLE_camera_settings?.pivot;
+                    doLogging(t);
+                    if (t) {viewer.cameraControls.setTarget(t[0], t[1], t[2])}
+                },
+                targetOrigin: () => {
+                    let t = [0, 0, 0];
+                    doLogging(t);
+                    viewer.cameraControls.setTarget(t[0], t[1], t[2]);
+                },
+                wireframe: () => {
+                    viewer.scene.traverse((child) => {
+                        if (child instanceof THREE.Mesh && child !== viewer.skyObject) {
+                            child.material.wireframe = !child.material.wireframe;
+                        }
+                    });
+                },
+                logInfo: ""
+            };
+
+            const toggleTreeView = gui.add(guiParams, 'toggleTreeView').name("Toggle Hierarchy");
+            const backgroundColorControl = gui.addColor(guiParams, 'backgroundColor').onChange(() => viewer.scene.background = new THREE.Color(guiParams.backgroundColor));
+            const fogColorControl = gui.addColor(guiParams, 'fogColor').onChange(() => viewer.scene.fog.color = new THREE.Color(guiParams.fogColor));
+            const fogDensityControl = gui.add(guiParams, 'fogDensity', 0, 1).onChange(() => viewer.scene.fog.density = guiParams.fogDensity);
+            const fogBackgroundControl = gui.add(guiParams, "fogBackground", ).name("Fog Background");
+            const toggleEnvironmentControl = gui.add(guiParams, 'toggleEnvironment').name("Toggle Environment");
+            const toggleSkyControl = gui.add(guiParams, 'toggleSky').name("Toggle Sky");
+            const wireframeControl = gui.add(guiParams, 'wireframe').name("Toggle Wireframe");
+            const listCamerasControl = gui.add(guiParams, 'listCameras').name("List Cameras");
+            const listLightsControl = gui.add(guiParams, 'listLights').name("List Lights");
+            const listOverridesControl = gui.add(guiParams, 'listOverrides').name("List Overrides");
+            const listSketchMetadataControl = gui.add(guiParams, 'listSketchMetadata').name("List Sketch MetaData");
+
+            const folder1 = gui.addFolder( 'Camera' );
+            const levelCameraControl = folder1.add(guiParams, 'levelCamera').name("Level Camera");
+            const frameSceneControl = folder1.add(guiParams, 'frameScene').name("Frame Scene");
+            const logTargetPointControl = folder1.add(guiParams, 'logTargetPoint').name("Log Target Point");
+
+            const folder2 = gui.addFolder( 'Camera Target' );
+            const targetPivotControl = folder2.add(guiParams, 'targetPivot').name("Target Pivot");
+            const targetVisualCenterControl = folder2.add(guiParams, 'targetVisualCenter').name("Target visualCenterPoint");
+            const targetVisualCenterYControl = folder2.add(guiParams, 'targetVisualCenterY').name("Target visualCenterPoint Y");
+            const targetBoundingBoxCenterControl = folder2.add(guiParams, 'targetBoundingBoxCenter').name("Target Bounding Box Center");
+            const targetOriginControl = folder2.add(guiParams, 'targetOrigin').name("Target Origin");
+
+            const logInfoControl = gui.add(guiParams, 'logInfo').name('Log Window');
+            window.logInfoControl = logInfoControl;
+            logInfoControl.domElement.getElementsByClassName("name")[0].style.display = "none";
+            let widget = logInfoControl.domElement.getElementsByClassName("widget")[0];
+            const logContainer = document.createElement('textarea');
+            logContainer.rows = 16;
+            logContainer.style.width = "100%";
+            logContainer.style.padding = "3px";
+            logContainer.style.fontFamily = "monospace";
+            logContainer.style.backgroundColor = "black";
+            logContainer.style.color = "white";
+            logContainer.style.fontSize = "9px";
+            logContainer.style.whiteSpace = "pre-wrap";
+            logContainer.style.wordWrap = "break-word";
+            widget.replaceChild(logContainer, widget.getElementsByTagName("input")[0]);
+
+            function doLogging(data) {
+                // Convert arbitrary data to readable text
+                console.log(data);
+                logContainer.value = JSON.stringify(data, null, 2);
+            }
+
+            guiParams.backgroundColor = "#" + (viewer.scene.background?.color?.getHexString() || "000000");
+            guiParams.fogColor = "#" + (viewer.scene.fog?.color?.getHexString() || "ffffff");
+            guiParams.fogDensity = viewer.scene.fog?.density;
+
+            if (!viewer.environmentObject) toggleEnvironmentControl.disable();
+            if (!viewer.skyObject) toggleSkyControl.disable();
+            if (!viewer.overrides?.geometryData?.visualCenterPoint) targetVisualCenterControl.disable();
+            if (!viewer.overrides?.geometryData?.visualCenterPoint) targetVisualCenterYControl.disable();
+            if (!viewer.overrides?.camera.GOOGLE_camera_settings?.pivot) targetPivotControl.disable();
+
+        </script>
+    </body>
+</html>
