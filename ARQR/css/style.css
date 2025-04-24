@@ -8,6 +8,7 @@
     height: 100%;
     display: block;
     cursor: grab;
+    background: transparent !important; /* Ensure canvas is transparent */
 }
 
 #c.grabbed {

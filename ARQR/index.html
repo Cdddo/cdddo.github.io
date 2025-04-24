@@ -75,10 +75,13 @@
 
         <div id="icosa-wrapper" style="position: relative; width: 100%; height: 100%; display: flex;">
             <div id="tree-view" style="width: 250px; overflow-y: auto; flex-shrink: 0;"></div>
+            <video id="camera-feed" autoplay playsinline
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;"></video>
             <div id="icosa-viewer" style="flex-grow: 1; height: 100%;"></div>
         </div>
 
         <script type="module">
+            // viewer initialization
             import { Viewer } from "./icosa-viewer.module.js";
             import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
@@ -88,6 +91,22 @@
             window.viewer = viewer;
             window.THREE = THREE;
             
+            // Camera feed initialization
+            async function initCameraFeed() {
+                const video = document.getElementById('camera-feed');
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({
+                        video: { facingMode: 'environment' } // Use rear camera
+                    });
+                    video.srcObject = stream;
+                } catch (error) {
+                    console.error('Error accessing camera:', error);
+                    video.style.display = 'none'; // Hide video if camera access fails
+                }
+            }
+
+            initCameraFeed();
+            
             //PREPARE FOR LOADING FILE
 
             // Get parameter from URL
@@ -95,7 +114,7 @@
 
             let cameraRotation = [-0.1462917120878683, 0.2306854792441933, 0.03510497024615985, 0.9613275121956582];
             let cameraTranslation = [1.586311936378479, 2.004192590713501, 3.153336048126221];
-            let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": "#000000", "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": { "color": [0, 0, 0] }, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
+            let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": null, "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": { "color": [0, 0, 0] }, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
             let overrides = {
                 'defaultBackgroundColor': presentationParams?.backgroundColor || "#000000",
                 'camera': presentationParams.camera,

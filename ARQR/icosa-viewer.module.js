@@ -72804,7 +72804,9 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         const renderer = new $ea01ff4a5048cd08$exports.WebGLRenderer({
             canvas: this.canvas,
             antialias: true
+            alpha: true // HYPER enable transparency
         });
+        
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputColorSpace = $ea01ff4a5048cd08$exports.SRGBColorSpace;
         renderer.xr.enabled = true;
@@ -72981,7 +72983,7 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
     }
     initializeScene(overrides) {
         let defaultBackgroundColor = overrides?.["defaultBackgroundColor"];
-        if (!defaultBackgroundColor) defaultBackgroundColor = "#000000";
+        if (!defaultBackgroundColor) defaultBackgroundColor = "#00000000";
         this.defaultBackgroundColor = new $ea01ff4a5048cd08$exports.Color(defaultBackgroundColor);
         if (!this.loadedModel) return;
         this.scene.clear();
