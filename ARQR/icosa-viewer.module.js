@@ -72806,7 +72806,9 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
             antialias: true,
             alpha: true // HYPER enable transparency
         });
+        console.log('Renderer alpha:', this.renderer.getContext().getAttribute('alpha')); // Should log true
         renderer.setClearColor(0x000000, 0); // HYPER Set clear color to transparent
+        console.log('Clear color:', this.renderer.getClearColor().getHex(), 'Clear alpha:', this.renderer.getClearAlpha()); // Should log 0, 0
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputColorSpace = $ea01ff4a5048cd08$exports.SRGBColorSpace;
         renderer.xr.enabled = true;
@@ -74753,18 +74755,19 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
     }
     initSceneBackground() {
         // OBJ and FBX models don't have metadata
-        if (!this.sketchMetadata == undefined) {
-            this.scene.background = this.defaultBackgroundColor;
-            return;
-        }
-        let sky = null;
-        if (this.sketchMetadata.UseGradient) sky = this.generateGradientSky(this.sketchMetadata.SkyColorA, this.sketchMetadata.SkyColorB, this.sketchMetadata.SkyGradientDirection);
-        else if (this.sketchMetadata.SkyTexture) sky = this.generateTextureSky(this.sketchMetadata.SkyTexture);
-        if (sky !== null) {
-            this.scene?.add(sky);
-            this.skyObject = sky;
-        } else // Use the default background color if there's no sky
-        this.scene.background = this.defaultBackgroundColor;
+        // if (!this.sketchMetadata == undefined) {
+        //     this.scene.background = this.defaultBackgroundColor;
+        //     return;
+        // }
+        // let sky = null;
+        // if (this.sketchMetadata.UseGradient) sky = this.generateGradientSky(this.sketchMetadata.SkyColorA, this.sketchMetadata.SkyColorB, this.sketchMetadata.SkyGradientDirection);
+        // else if (this.sketchMetadata.SkyTexture) sky = this.generateTextureSky(this.sketchMetadata.SkyTexture);
+        // if (sky !== null) {
+        //     this.scene?.add(sky);
+        //     this.skyObject = sky;
+        // } else // Use the default background color if there's no sky
+        this.scene.background = null;
+        console.log("Set null bg");
     }
     frameScene() {
         if (this.selectedNode != null) // If a node is selected in the treeview, frame that
