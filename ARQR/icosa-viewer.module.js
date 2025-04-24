@@ -72775,7 +72775,7 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         this.brushPath = new URL('brushes/', assetBaseUrl);
         this.environmentPath = new URL('environments/', assetBaseUrl);
         this.texturePath = new URL('textures/', assetBaseUrl);
-        this.defaultBackgroundColor = new $ea01ff4a5048cd08$exports.Color(0x000000);
+        this.defaultBackgroundColor = new $ea01ff4a5048cd08$exports.Color(0x000000, 0);
         this.tiltLoader = new (0, $55489216125af3e6$export$36ca96fcead4fad7)(manager);
         this.tiltLoader.setBrushPath(this.brushPath.toString());
         this.objLoader = new (0, $21fa36e3a39b221c$export$7ae31604ad04b4a7)(manager);
@@ -72983,7 +72983,7 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
     }
     initializeScene(overrides) {
         let defaultBackgroundColor = overrides?.["defaultBackgroundColor"];
-        if (!defaultBackgroundColor) defaultBackgroundColor = null;
+        if (!defaultBackgroundColor) defaultBackgroundColor = new $ea01ff4a5048cd08$exports.Color(0x000000, 0);
         this.defaultBackgroundColor = new $ea01ff4a5048cd08$exports.Color(defaultBackgroundColor);
         if (!this.loadedModel) return;
         this.scene.clear();
