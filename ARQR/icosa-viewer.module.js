@@ -72806,9 +72806,9 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
             antialias: true,
             alpha: true // HYPER enable transparency
         });
-        console.log('Renderer alpha:', this.renderer.getContext().getAttribute('alpha')); // Should log true
+        console.log('Renderer alpha:', renderer.getContext().getAttribute('alpha')); // Should log true
         renderer.setClearColor(0x000000, 0); // HYPER Set clear color to transparent
-        console.log('Clear color:', this.renderer.getClearColor().getHex(), 'Clear alpha:', this.renderer.getClearAlpha()); // Should log 0, 0
+        console.log('Clear color:', renderer.getClearColor().getHex(), 'Clear alpha:', renderer.getClearAlpha()); // Should log 0, 0
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputColorSpace = $ea01ff4a5048cd08$exports.SRGBColorSpace;
         renderer.xr.enabled = true;
