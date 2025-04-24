@@ -116,7 +116,7 @@
             let cameraTranslation = [1.586311936378479, 2.004192590713501, 3.153336048126221];
             let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": null, "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": { "color": [0, 0, 0] }, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
             let overrides = {
-                'defaultBackgroundColor': presentationParams?.backgroundColor || "#000000",
+                'defaultBackgroundColor': presentationParams?.backgroundColor || "#00000000",
                 'camera': presentationParams.camera,
                 'geometryData': presentationParams.GOOGLE_geometry_data,
                 'colorSpace': presentationParams.colorSpace,
