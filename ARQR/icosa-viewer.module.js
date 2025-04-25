@@ -74868,6 +74868,76 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         }
         parentElement.appendChild(nodeElement);
     }
+
+    // Use viewer.flatCamera.matrixWorld to get the camera's world transformation matrix,
+    // which combines position, rotation, and scale. To extract position and rotation,
+    // decompose the matrix using matrixWorld.decompose(position, quaternion, scale).
+
+    // this.flatCamera = new $ea01ff4a5048cd08$exports.PerspectiveCamera(fov, aspect, near, far);
+    // this.flatCamera.position.set(cameraPos[0], cameraPos[1], cameraPos[2]);
+    // this.flatCamera.quaternion.set(cameraRot[0], cameraRot[1], cameraRot[2], cameraRot[3]);
+
+    // Log camera position and rotation
+    logCamera() {
+        let cameraPos = this.activeCamera.position;
+        let cameraQua = this.activeCamera.quaternion;
+        // let cameraTar = new $ea01ff4a5048cd08$exports.Vector3();
+        // this.cameraControls.getTarget(cameraTar);
+        // let matrix = this.cameraControls.camera.matrixWorld;
+        console.log('Camera Position:', cameraPos, 'Quaternion:', cameraQua);
+    }
+    // Set camera position to specified values
+    // setCameraPosition(x, y, z) {
+    //     this.activeCamera.position.set(x, y, z);
+    //     this.activeCamera.updateMatrixWorld();
+    //     console.log('Camera position set - Position:', this.activeCamera.position);
+    // }
+    // // Set camera rotation to specified values
+    // setCameraRotation(x, y, z) {
+    //     x = this.degToRad(x); // Convert degrees to radians
+    //     y = this.degToRad(y);
+    //     z = this.degToRad(z);
+    //     this.activeCamera.rotation.set(x, y, z);
+    //     this.activeCamera.updateMatrixWorld();
+    //     console.log('Camera rotation set - Rotation:', this.activeCamera.rotation);
+    // }
+    // // Move camera by 0.25 units along the specified axis
+    // moveCameraAlongAxis(axis, distance = 0.25) {
+    //     if (axis === 'x') {
+    //         this.activeCamera.position.x += distance;
+    //     } else if (axis === 'y') {
+    //         this.activeCamera.position.y += distance;
+    //     } else if (axis === 'z') {
+    //         this.activeCamera.position.z += distance;
+    //     }
+    //     console.log(`Camera moved along ${axis} by ${distance} - New position:`, this.activeCamera.position);
+    // }
+    // // Move camera 0.25 units in the direction it's facing
+    // moveCameraInDirection(distance = 0.25) {
+    //     // Get the camera's forward direction
+    //     const direction = new $ea01ff4a5048cd08$exports.Vector3();
+    //     this.activeCamera.getWorldDirection(direction); // Gets the direction the camera is facing
+    //     direction.normalize(); // Ensure unit vector
+    //     direction.multiplyScalar(distance); // Scale by distance
+    //     this.activeCamera.position.add(direction); // Move camera in that direction
+    //     console.log(`Camera moved in direction by ${distance} - New position:`, this.activeCamera.position);
+    // }
+    // // Rotate camera by 10 degrees (converted to radians) around the specified axis
+    // rotateCamera(axis, degrees = 10) {
+    //     const radians = this.degToRad(degrees); // Convert degrees to radians
+    //     if (axis === 'x') {
+    //         this.activeCamera.rotation.x += radians;
+    //     } else if (axis === 'y') {
+    //         this.activeCamera.rotation.y += radians;
+    //     } else if (axis === 'z') {
+    //         this.activeCamera.rotation.z += radians;
+    //     }
+    //     console.log(`Camera rotated around ${axis} by ${degrees} degrees - New rotation:`, this.activeCamera.rotation);
+    // }
+    degToRad(degrees)
+    {
+        return $ea01ff4a5048cd08$exports.MathUtils.degToRad(degrees);
+    }
 }
 
 
