@@ -72809,7 +72809,7 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         renderer.setClearColor(0x000000, 0); // HYPER Set clear color to transparent
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputColorSpace = $ea01ff4a5048cd08$exports.SRGBColorSpace;
-        renderer.xr.enabled = true;
+        // renderer.xr.enabled = true;
         function handleController(inputSource) {
             const gamepad = inputSource.gamepad;
             if (gamepad) return {
@@ -72836,8 +72836,8 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         controllerGrip1 = renderer.xr.getControllerGrip(1);
         controllerGrip1.add(controllerModelFactory.createControllerModel(controllerGrip1));
         this.scene.add(controllerGrip1);
-        let xrButton = (0, $2700ada9f878d4f8$export$d1c1e163c7960c6).createButton(renderer);
-        this.icosa_frame.appendChild(xrButton);
+        // let xrButton = (0, $2700ada9f878d4f8$export$d1c1e163c7960c6).createButton(renderer);
+        // this.icosa_frame.appendChild(xrButton);
         function initCustomUi(viewerContainer) {
             const button = document.createElement('button');
             button.innerHTML = `<?xml version="1.0" encoding="utf-8"?>
