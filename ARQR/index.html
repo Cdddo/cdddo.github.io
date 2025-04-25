@@ -30,7 +30,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            display: none;
+            /* display: none; */
         }
     </style>
     <style>
@@ -111,9 +111,74 @@
 
             // Get parameter from URL
             const id = new URLSearchParams(window.location.search).get('id');
+            const cases = {
+                    "0": {
+                        "name": "Test Model",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/test/Untitled_0.glb",
+                        "rotation": [-0.0242630885505416, 0.9372331109337174, 0.0666042056168146, 0.3414224335008579],
+                        "position": [0.9495268673616416, 1.7051674160828811, -1.2429322629184787],
+                        "target": [-0.6741747179498548, 1.3445624988794393, 0.689918799958044],
+                    },
+                    "46": {
+                        "name": "Isis",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/46/Untitled_46.glb",
+                        "rotation": [-0.1158330515009674, 0.3164249766532016, 0.0389624604446174, 0.9407124241797261],
+                        "position": [-0.1025028053925485, 3.3467472957636835, -1.7527729295548979],
+                        "target": [-0.1025103035866958, 3.3467441933156934, -1.7527828143210353],
+                    },
+                    "47": {
+                        "name": "Hathor",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb",
+                        "rotation": [-0.0202861731066084, 0.9788617083785720, 0.1217824202589472, 0.1630560307585873],
+                        "position": [-0.1474373197724407, 1.7669227705873281, -0.2520042515992922],
+                        "target": [-0.5308272867981758, 1.468006290325621, 0.8668514643432459],
+                    },
+                    "48": {
+                        "name": "Atenea",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb",
+                        "rotation": [-0.0432504857675537, -0.1863086593205507, -0.0082097841016313, 0.9815044973855465],
+                        "position": [0.2208818626141567, 9.0716673312409561, -0.4124320047325343],
+                        "target": [1.8794487386907275, 8.6719914085684646, -4.6238186878762164],
+                    },
+                    "49": {
+                        "name": "Hecate",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb",
+                        "rotation": [0.0010413283410902, 0.9989199882653236, 0.0369485301621450, -0.0281527760291761],
+                        "position": [-0.0149918015427358, 2.1339305262094785, -0.7071207049631006],
+                        "target": [0.0570708774829279, 2.0391485518705599, 0.5703318863668881],
+                    },
+                    "505": {
+                        "name": "Afrodita",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/505/Untitled_505.glb",
+                        "rotation": [0.0011042689145662, 0.9987076452898269, 0.0442930094470669, -0.0248987779606886],
+                        "position": [0.0108778333247246, 2.2343745819943410, -0.4346332471489558],
+                        "target": [0.0419812357566649, 2.1789005174497009, 0.1887688003831545],
+                    },
+                    "607": {
+                        "name": "Demeter",
+                        "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/607/Untitled_607.glb",
+                        "rotation": [-0.0733547984409287, 0.0088217057524412, 0.0006488880664438, 0.9972666794782552],
+                        "position": [-0.0442979011184844, 5.8991044659028349, 1.2685957480200627],
+                        "target": [-0.1177232790463011, 5.2851838086740539, -2.8813359705669916],
+                    },
+                    // Add more cases as needed
+            };
             
-            let cameraRotation = [-0.048683353653306956, 0.020736868766778906, 0.001010957209258065, 0.9985984635058965]; //quaternion
-            let cameraTranslation = [-0.002274463546212857, 5.746588183599179, 1.3643521089934767];
+            let url, rotation, position, target;
+            if (id in cases) {
+                ({ url, rotation, position, target } = cases[id]);
+            }
+            else {
+                console.error(`No model found for id: ${id}, attempting to load as URL`);
+                // try to load the model from an arbitrary URL
+                url = id;
+                rotation = [0, 0, 0, 1];
+                position = [0, 0, 0];
+                target = [0, 0, 0];
+            }
+
+            let cameraRotation = rotation;
+            let cameraTranslation = position;
             let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": null, "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": null, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
             let overrides = {
                 'defaultBackgroundColor': presentationParams?.backgroundColor || null,
@@ -122,32 +187,9 @@
                 'colorSpace': presentationParams.colorSpace,
             };
 
-            const cases = {
-                "0": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/test/Untitled_0.glb", "overrides": overrides },
-                "46": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/46/Untitled_46.glb", "overrides": overrides },
-                "47": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb", "overrides": overrides },
-                "48": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb", "overrides": overrides },
-                "49": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb", "overrides": overrides },
-                "56": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/56/Untitled_56Atenea.glb", "overrides": overrides },
-                "505": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/505/Untitled_505.glb", "overrides": overrides },
-                "607": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/607/Untitled_607.glb", "overrides": overrides },
-                // Add more cases as needed
-            };
-            if (id in cases) {
-                const { url, overrides } = cases[id];
-                console.log(`Loading GLTF2 model from URL: ${url}`);
-                await viewer.loadGltf(url, true, overrides);
-            } else {
-                // console.error(`No model found for id: ${id}`);
-                // try to load the model from an arbitrary URL
-                console.log(`Loading GLTF2 model from URL: ${id}`);
-                await viewer.loadGltf(id, true, overrides);
-            }
-            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/test/Untitled_0.glb", true, { "camera": presentationParams.camera });
-            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/46/Untitled_46.glb", true, { "camera": presentationParams.camera });
-            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb", true, { "camera": presentationParams.camera });
-            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb", true, { "camera": presentationParams.camera });
-            // await viewer.loadGltf("https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb", true, { "camera": presentationParams.camera });
+            console.log(`Loading GLTF2 model from URL: ${url}`);
+            await viewer.loadGltf(url, true, overrides);
+            viewer.cameraControls.setTarget(target[0], target[1], target[2]);
 
             // await viewer.loadGltf("formats/gltf2/all_brushes.glb", true, {"camera": presentationParams.camera});
             // await viewer.loadGltf("formats/gltf2/gradient.gltf", true, {"camera": presentationParams.camera});
