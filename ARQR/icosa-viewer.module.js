@@ -72806,9 +72806,7 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
             antialias: true,
             alpha: true // HYPER enable transparency
         });
-        console.log('Renderer alpha:', renderer.getContext().getAttribute('alpha')); // Should log true
         renderer.setClearColor(0x000000, 0); // HYPER Set clear color to transparent
-        console.log('Clear color:', renderer.getClearColor().getHex(), 'Clear alpha:', renderer.getClearAlpha()); // Should log 0, 0
         renderer.setPixelRatio(window.devicePixelRatio);
         renderer.outputColorSpace = $ea01ff4a5048cd08$exports.SRGBColorSpace;
         renderer.xr.enabled = true;
@@ -74766,7 +74764,8 @@ class $3c43f222267ed54b$export$2ec4afd9b3c16a85 {
         //     this.scene?.add(sky);
         //     this.skyObject = sky;
         // } else // Use the default background color if there's no sky
-        this.scene.background = null;
+        this.scene.background = null; // HYPER fix to make background transparent.
+        // this.scene.environment = null;
         console.log("Set null bg");
     }
     frameScene() {
