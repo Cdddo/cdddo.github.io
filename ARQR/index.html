@@ -30,7 +30,7 @@
             position: absolute;
             top: 0;
             right: 0;
-            /* display: none; */
+            display: none;
         }
     </style>
     <style>
@@ -111,10 +111,10 @@
 
             // Get parameter from URL
             const id = new URLSearchParams(window.location.search).get('id');
-
-            let cameraRotation = [-0.1462917120878683, 0.2306854792441933, 0.03510497024615985, 0.9613275121956582];
-            let cameraTranslation = [1.586311936378479, 2.004192590713501, 3.153336048126221];
-            let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": null, "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": { "color": [0, 0, 0] }, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
+            
+            let cameraRotation = [-0.048683353653306956, 0.020736868766778906, 0.001010957209258065, 0.9985984635058965]; //quaternion
+            let cameraTranslation = [-0.002274463546212857, 5.746588183599179, 1.3643521089934767];
+            let presentationParams = { "camera": { "type": "perspective", "rotation": cameraRotation, "perspective": { "yfov": 0, "znear": 0.1 }, "translation": cameraTranslation, "GOOGLE_camera_settings": null }, "colorSpace": "GAMMA", "backgroundColor": null, "GOOGLE_hemi_light": null, "orientingRotation": { "w": 1 }, "GOOGLE_backgrounds": null, "GOOGLE_lighting_rig": null, "GOOGLE_geometry_data": null, "GOOGLE_scene_rotation": null, "GOOGLE_lights_image_based": null, "GOOGLE_real_world_transform": { "scaling_factor": 1 }, "GOOGLE_initial_camera_motion": null };
             let overrides = {
                 'defaultBackgroundColor': presentationParams?.backgroundColor || null,
                 'camera': presentationParams.camera,
@@ -128,6 +128,9 @@
                 "47": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/47/Untitled_47.glb", "overrides": overrides },
                 "48": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/48/Untitled_48.glb", "overrides": overrides },
                 "49": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/49/Untitled_49.glb", "overrides": overrides },
+                "56": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/56/Untitled_56Atenea.glb", "overrides": overrides },
+                "505": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/505/Untitled_505.glb", "overrides": overrides },
+                "607": { "url": "https://raw.githubusercontent.com/Cdddo/ARQR/main/models/607/Untitled_607.glb", "overrides": overrides },
                 // Add more cases as needed
             };
             if (id in cases) {
@@ -149,14 +152,12 @@
             // await viewer.loadGltf("formats/gltf2/all_brushes.glb", true, {"camera": presentationParams.camera});
             // await viewer.loadGltf("formats/gltf2/gradient.gltf", true, {"camera": presentationParams.camera});
 
-            let cameras1 = [];
-            viewer.scene.traverse((child) => {
-                if (child instanceof THREE.Camera) {
-                    cameras1.push(child);
-                }
-            });
-            cameras1[0].rotation.set
-
+            // let cameras1 = [];
+            // viewer.scene.traverse((child) => {
+            //     if (child instanceof THREE.Camera) {
+            //         cameras1.push(child);
+            //     }
+            // });
 
             const gui = new GUI({ autoPlace: false });
             const parentDiv = document.getElementById('icosa-viewer');
